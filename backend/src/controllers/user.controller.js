@@ -20,6 +20,10 @@ export const createUser = async (req, res, next) => {
 
 export const getUser = async (req, res, next) => {
   try {
+    if (req.user.id !== Number(req.params.id)) {
+      throw createHttpError(403, 'No tienes permiso para consultar este usuario')
+    }
+
     const user = await User.findByPk(req.params.id, { attributes: ['id', 'email'] })
 
     if (!user) {
