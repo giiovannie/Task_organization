@@ -13,12 +13,14 @@ const ExamsPage = () => {
   const [form, setForm] = useState(initialForm)
   const [editingId, setEditingId] = useState(null)
 
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault()
     if (!form.title || !form.exam_date || !form.subject_id) return notify('Completá los campos obligatorios.', 'danger')
     const values = { ...form, subject_id: Number(form.subject_id) }
-    if (editingId) updateItem('exams', editingId, values)
-    else addItem('exams', { ...values, grade: null })
+    const succeeded = editingId
+      ? await updateItem('exams', editingId, values)
+      : await addItem('exams', { ...values, grade: null })
+    if (!succeeded) return
     setForm(initialForm); setEditingId(null); notify(editingId ? 'Examen actualizado.' : 'Examen creado.')
   }
 
@@ -35,7 +37,7 @@ const ExamsPage = () => {
                 <div className="d-flex justify-content-between gap-2 mb-3"><span className="small text-secondary">{subject?.name}</span>{exam.grade !== null ? <span className="grade-badge">Nota {exam.grade}</span> : <span className={`badge text-bg-${urgencyClass(days)}`}>{days < 0 ? 'Realizado' : days === 0 ? 'Hoy' : `${days} días`}</span>}</div>
                 <h2 className="h5">{exam.title}</h2><p className="text-secondary small">{exam.topics}</p><p className="fw-semibold">{formatDate(exam.exam_date)}</p>
                 <label className="form-label small" htmlFor={`grade-${exam.id}`}>Calificación</label><div className="input-group input-group-sm mb-3"><input className="form-control" id={`grade-${exam.id}`} max="10" min="1" type="number" value={exam.grade ?? ''} onChange={(event) => updateItem('exams', exam.id, { grade: event.target.value === '' ? null : Number(event.target.value) })} /><span className="input-group-text">/ 10</span></div>
-                <div className="d-flex gap-2"><button className="btn btn-sm btn-outline-primary" onClick={() => { setEditingId(exam.id); setForm({ title: exam.title, exam_date: exam.exam_date, topics: exam.topics, subject_id: exam.subject_id }) }} type="button">Editar</button><ConfirmButton message={`¿Eliminar el examen ${exam.title}?`} onConfirm={() => removeItem('exams', exam.id)}>Eliminar</ConfirmButton></div>
+                <div className="d-flex gap-2"><button className="btn btn-sm btn-outline-primary" onClick={() => { setEditingId(exam.id); setForm({ title: exam.title, exam_date: exam.exam_date, topics: exam.topics, subject_id: exam.subject_id }) }} type="button">Editar</button><ConfirmButton message={`¿Eliminar el examen ${exam.title}?`} onConfirm={async () => { if (await removeItem('exams', exam.id)) notify('Examen eliminado.', 'warning') }}>Eliminar</ConfirmButton></div>
               </div></article></div>
             })}</div>
           )}

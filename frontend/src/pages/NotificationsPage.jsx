@@ -2,7 +2,7 @@ import { EmptyState } from '../components/ui/EmptyState.jsx'
 import { PageHeader } from '../components/ui/PageHeader.jsx'
 import { useAppData } from '../hooks/useAppData.js'
 
-const icons = { exam: '◫', task: '✓', study: '◎' }
+const icons = { exam: '◫', task: '✓', study_activity: '◎' }
 
 const NotificationsPage = () => {
   const { data, updateItem, notify } = useAppData()

@@ -10,9 +10,9 @@ const ProfilePage = () => {
   const navigate = useNavigate()
   const [form, setForm] = useState(data.profile)
 
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault()
-    updateProfile(form); notify('Perfil actualizado.')
+    if (await updateProfile(form)) notify('Perfil actualizado.')
   }
 
   return (

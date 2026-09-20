@@ -12,21 +12,23 @@ const SubjectsPage = () => {
   const [editingId, setEditingId] = useState(null)
   const [teacherName, setTeacherName] = useState('')
 
-  const submitSubject = (event) => {
+  const submitSubject = async (event) => {
     event.preventDefault()
     if (!form.name || !form.teacher_id) return notify('Completá la materia y el profesor.', 'danger')
     const values = { ...form, teacher_id: Number(form.teacher_id) }
-    if (editingId) updateItem('subjects', editingId, values)
-    else addItem('subjects', values)
+    const succeeded = editingId
+      ? await updateItem('subjects', editingId, values)
+      : await addItem('subjects', values)
+    if (!succeeded) return
     notify(editingId ? 'Materia actualizada.' : 'Materia creada.')
     setForm(emptySubject)
     setEditingId(null)
   }
 
-  const submitTeacher = (event) => {
+  const submitTeacher = async (event) => {
     event.preventDefault()
     if (!teacherName.trim()) return
-    addItem('teachers', { name: teacherName.trim() })
+    if (!await addItem('teachers', { name: teacherName.trim() })) return
     setTeacherName('')
     notify('Profesor agregado.')
   }
@@ -49,7 +51,7 @@ const SubjectsPage = () => {
                       <span className="badge bg-light text-dark mb-4">{taskCount} tareas</span>
                       <div className="d-flex gap-2">
                         <button className="btn btn-sm btn-outline-primary" onClick={() => { setEditingId(subject.id); setForm({ name: subject.name, teacher_id: subject.teacher_id }) }} type="button">Editar</button>
-                        <ConfirmButton message={`¿Eliminar la materia ${subject.name}?`} onConfirm={() => { removeItem('subjects', subject.id); notify('Materia eliminada.', 'warning') }}>Eliminar</ConfirmButton>
+                        <ConfirmButton message={`¿Eliminar la materia ${subject.name}?`} onConfirm={async () => { if (await removeItem('subjects', subject.id)) notify('Materia eliminada.', 'warning') }}>Eliminar</ConfirmButton>
                       </div>
                     </div></article>
                   </div>
