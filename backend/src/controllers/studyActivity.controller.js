@@ -1,5 +1,6 @@
 import { StudyActivity, Subject } from '../models/index.js'
 import { createHttpError } from '../utils/httpError.js'
+import { pick } from '../utils/pick.js'
 
 const attributes = ['id', 'title', 'target_date', 'status', 'subject_id']
 
@@ -27,7 +28,7 @@ export const createStudyActivity = async (req, res, next) => {
   try {
     const subject = await Subject.findOne({ where: { id: req.body.subject_id, user_id: req.user.id } })
     if (!subject) throw createHttpError(400, 'La materia indicada no es válida')
-    const activity = await StudyActivity.create(req.body)
+    const activity = await StudyActivity.create(pick(req.body, ['title', 'target_date', 'subject_id']))
     return res.status(201).json(attributes.reduce((data, key) => ({ ...data, [key]: activity[key] }), {}))
   } catch (error) { return next(error) }
 }

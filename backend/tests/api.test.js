@@ -27,4 +27,14 @@ describe('API', () => {
     expect(response.status).toBe(401)
     expect(response.body).toEqual({ message: 'Debes iniciar sesión' })
   })
+
+  it('normaliza los errores de JSON inválido', async () => {
+    const response = await request(app)
+      .post('/api/users')
+      .set('Content-Type', 'application/json')
+      .send('{')
+
+    expect(response.status).toBe(400)
+    expect(response.body).toEqual({ message: 'El cuerpo JSON no es válido' })
+  })
 })

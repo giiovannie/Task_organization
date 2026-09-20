@@ -1,5 +1,6 @@
 import { Subject, Teacher } from '../models/index.js'
 import { createHttpError } from '../utils/httpError.js'
+import { pick } from '../utils/pick.js'
 
 const subjectInclude = [{ model: Teacher, as: 'teacher', attributes: ['id', 'name'] }]
 
@@ -39,7 +40,7 @@ export const getSubject = async (req, res, next) => {
 export const createSubject = async (req, res, next) => {
   try {
     await ensureTeacher(req.body.teacher_id, req.user.id)
-    const subject = await Subject.create({ ...req.body, user_id: req.user.id })
+    const subject = await Subject.create({ ...pick(req.body, ['name', 'teacher_id']), user_id: req.user.id })
     return res.status(201).json({ id: subject.id, name: subject.name, teacher_id: subject.teacher_id })
   } catch (error) {
     return next(error)
@@ -51,7 +52,7 @@ export const updateSubject = async (req, res, next) => {
     const subject = await Subject.findOne({ where: { id: req.params.id, user_id: req.user.id } })
     if (!subject) throw createHttpError(404, 'La materia no fue encontrada')
     await ensureTeacher(req.body.teacher_id, req.user.id)
-    await subject.update(req.body)
+    await subject.update(pick(req.body, ['name', 'teacher_id']))
     return res.json({ id: subject.id, name: subject.name, teacher_id: subject.teacher_id })
   } catch (error) {
     return next(error)
