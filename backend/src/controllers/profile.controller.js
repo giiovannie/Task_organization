@@ -1,5 +1,6 @@
 import { Profile } from '../models/index.js'
 import { createHttpError } from '../utils/httpError.js'
+import { pick } from '../utils/pick.js'
 
 const profileAttributes = ['id', 'user_id', 'name', 'last_name', 'nickname', 'avatar_url']
 
@@ -29,7 +30,7 @@ export const createProfile = async (req, res, next) => {
 
     const [profile, created] = await Profile.findOrCreate({
       where: { user_id: req.user.id },
-      defaults: req.body,
+      defaults: pick(req.body, ['user_id', 'name', 'last_name', 'nickname', 'avatar_url']),
     })
 
     if (!created) throw createHttpError(409, 'El usuario ya tiene un perfil')
@@ -44,7 +45,7 @@ export const updateProfile = async (req, res, next) => {
     const profile = await Profile.findOne({ where: { id: req.params.id, user_id: req.user.id } })
     if (!profile) throw createHttpError(404, 'El perfil no fue encontrado')
 
-    await profile.update(req.body)
+    await profile.update(pick(req.body, ['name', 'last_name', 'nickname', 'avatar_url']))
     return res.json(profileAttributes.reduce((data, key) => ({ ...data, [key]: profile[key] }), {}))
   } catch (error) {
     return next(error)

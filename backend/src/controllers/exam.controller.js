@@ -1,5 +1,6 @@
 import { Exam, Subject } from '../models/index.js'
 import { createHttpError } from '../utils/httpError.js'
+import { pick } from '../utils/pick.js'
 
 const examAttributes = ['id', 'title', 'exam_date', 'topics', 'grade', 'subject_id']
 
@@ -44,7 +45,7 @@ export const getExam = async (req, res, next) => {
 export const createExam = async (req, res, next) => {
   try {
     await findOwnedSubject(req.body.subject_id, req.user.id)
-    const exam = await Exam.create(req.body)
+    const exam = await Exam.create(pick(req.body, ['title', 'exam_date', 'topics', 'subject_id']))
     return res.status(201).json(examAttributes.reduce((data, key) => ({ ...data, [key]: exam[key] }), {}))
   } catch (error) { return next(error) }
 }
@@ -53,7 +54,7 @@ export const updateExam = async (req, res, next) => {
   try {
     const exam = await findOwnedExam(req.params.id, req.user.id)
     if (req.body.subject_id) await findOwnedSubject(req.body.subject_id, req.user.id)
-    await exam.update(req.body)
+    await exam.update(pick(req.body, ['title', 'exam_date', 'topics', 'subject_id']))
     return res.json(examAttributes.reduce((data, key) => ({ ...data, [key]: exam[key] }), {}))
   } catch (error) { return next(error) }
 }
