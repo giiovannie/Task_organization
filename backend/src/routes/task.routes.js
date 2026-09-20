@@ -15,11 +15,15 @@ import {
   taskStatusValidator,
   updateTaskValidator,
 } from '../validators/task.validator.js'
+import { createTaskNote, getTaskNotes } from '../controllers/taskNote.controller.js'
+import { noteBodyValidator, taskNoteTaskIdValidator } from '../validators/taskNote.validator.js'
 
 const router = Router()
 
 router.use(authenticate)
 router.get('/', getTasks)
+router.get('/:taskId/notes', taskNoteTaskIdValidator, validateRequest, getTaskNotes)
+router.post('/:taskId/notes', taskNoteTaskIdValidator, noteBodyValidator, validateRequest, createTaskNote)
 router.get('/:id', taskIdValidator, validateRequest, getTask)
 router.post('/', createTaskValidator, validateRequest, createTask)
 router.put('/:id', taskIdValidator, updateTaskValidator, validateRequest, updateTask)
