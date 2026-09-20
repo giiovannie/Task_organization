@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Outlet, useLocation } from 'react-router-dom'
 import Sidebar from '../components/common/Sidebar.jsx'
 import Topbar from '../components/common/Topbar.jsx'
 import Toast from '../components/ui/Toast.jsx'
@@ -9,6 +9,19 @@ import { useAppData } from '../hooks/useAppData.js'
 const MainLayout = () => {
   const [menuOpen, setMenuOpen] = useState(false)
   const { isLoading, error, retry } = useAppData()
+  const location = useLocation()
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.requestAnimationFrame(() => document.querySelector('#main-content')?.focus())
+  }, [location.pathname])
+
+  useEffect(() => {
+    if (!menuOpen) return undefined
+    const closeOnEscape = (event) => event.key === 'Escape' && setMenuOpen(false)
+    document.addEventListener('keydown', closeOnEscape)
+    return () => document.removeEventListener('keydown', closeOnEscape)
+  }, [menuOpen])
 
   return (
     <div className="app-shell min-vh-100">
