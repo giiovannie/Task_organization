@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 import EmptyState from '../components/ui/EmptyState.jsx'
 import PageHeader from '../components/ui/PageHeader.jsx'
+import ConfirmButton from '../components/ui/ConfirmButton.jsx'
+import TaskForm from '../components/common/TaskForm.jsx'
 import { useAppData } from '../hooks/useAppData.js'
 import { formatDate } from '../utils/date.js'
 
@@ -47,20 +49,14 @@ const TasksPage = () => {
                 <div className="d-flex flex-wrap align-content-start gap-2">
                   <select className="form-select form-select-sm status-select" value={task.status} onChange={(event) => { updateItem('tasks', task.id, { status: event.target.value }); notify('Estado actualizado.') }} aria-label="Estado de tarea">{Object.entries(statusLabels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select>
                   <button className="btn btn-sm btn-outline-primary" onClick={() => { setEditingId(task.id); setForm({ title: task.title, description: task.description, due_date: task.due_date, subject_id: task.subject_id }) }} type="button">Editar</button>
-                  <button className="btn btn-sm btn-outline-danger" onClick={() => removeItem('tasks', task.id)} type="button">Eliminar</button>
+                  <ConfirmButton message={`¿Eliminar la tarea ${task.title}?`} onConfirm={() => removeItem('tasks', task.id)}>Eliminar</ConfirmButton>
                 </div>
               </div>
-              <div className="task-notes mt-3 pt-3 border-top"><strong className="small">Notas</strong>{data.notes.filter(({ task_id }) => task_id === task.id).map((note) => <div className="note-row" key={note.id}>{editingNote.id === note.id ? <div className="input-group input-group-sm"><input aria-label="Editar contenido de la nota" className="form-control" value={editingNote.content} onChange={(event) => setEditingNote({ ...editingNote, content: event.target.value })} /><button className="btn btn-outline-primary" onClick={() => { updateItem('notes', note.id, { content: editingNote.content }); setEditingNote({ id: null, content: '' }); notify('Nota actualizada.') }} type="button">Guardar</button></div> : <><span>{note.content}</span><span><button className="btn btn-sm btn-link" onClick={() => setEditingNote({ id: note.id, content: note.content })} type="button">Editar</button><button className="btn btn-sm btn-link text-danger" onClick={() => removeItem('notes', note.id)} type="button">Eliminar</button></span></>}</div>)}<div className="input-group input-group-sm mt-2"><input aria-label={`Nueva nota para ${task.title}`} className="form-control" value={noteDrafts[task.id] ?? ''} onChange={(event) => setNoteDrafts({ ...noteDrafts, [task.id]: event.target.value })} placeholder="Nueva nota" /><button className="btn btn-outline-secondary" onClick={() => addNote(task.id)} type="button">Agregar</button></div></div>
+              <div className="task-notes mt-3 pt-3 border-top"><strong className="small">Notas</strong>{data.notes.filter(({ task_id }) => task_id === task.id).map((note) => <div className="note-row" key={note.id}>{editingNote.id === note.id ? <div className="input-group input-group-sm"><input aria-label="Editar contenido de la nota" className="form-control" value={editingNote.content} onChange={(event) => setEditingNote({ ...editingNote, content: event.target.value })} /><button className="btn btn-outline-primary" onClick={() => { updateItem('notes', note.id, { content: editingNote.content }); setEditingNote({ id: null, content: '' }); notify('Nota actualizada.') }} type="button">Guardar</button></div> : <><span>{note.content}</span><span><button className="btn btn-sm btn-link" onClick={() => setEditingNote({ id: note.id, content: note.content })} type="button">Editar</button><ConfirmButton className="btn btn-sm btn-link text-danger" message="¿Eliminar esta nota?" onConfirm={() => removeItem('notes', note.id)}>Eliminar</ConfirmButton></span></>}</div>)}<div className="input-group input-group-sm mt-2"><input aria-label={`Nueva nota para ${task.title}`} className="form-control" value={noteDrafts[task.id] ?? ''} onChange={(event) => setNoteDrafts({ ...noteDrafts, [task.id]: event.target.value })} placeholder="Nueva nota" /><button className="btn btn-outline-secondary" onClick={() => addNote(task.id)} type="button">Agregar</button></div></div>
             </div></article>
           ))}
         </div>
-        <div className="col-12 col-xl-4"><div className="card border-0 sticky-xl-top form-card"><div className="card-body p-4"><h2 className="h5 mb-3">{editingId ? 'Editar tarea' : 'Nueva tarea'}</h2><form onSubmit={submit}>
-          <label className="form-label" htmlFor="task-title">Título *</label><input className="form-control mb-3" id="task-title" required value={form.title} onChange={(event) => setForm({ ...form, title: event.target.value })} />
-          <label className="form-label" htmlFor="task-description">Descripción</label><textarea className="form-control mb-3" id="task-description" rows="3" value={form.description} onChange={(event) => setForm({ ...form, description: event.target.value })} />
-          <label className="form-label" htmlFor="task-subject">Materia *</label><select className="form-select mb-3" id="task-subject" required value={form.subject_id} onChange={(event) => setForm({ ...form, subject_id: event.target.value })}><option value="">Seleccionar</option>{data.subjects.map((subject) => <option key={subject.id} value={subject.id}>{subject.name}</option>)}</select>
-          <label className="form-label" htmlFor="task-date">Fecha de entrega *</label><input className="form-control mb-3" id="task-date" required type="date" value={form.due_date} onChange={(event) => setForm({ ...form, due_date: event.target.value })} />
-          <button className="btn btn-primary w-100" type="submit">{editingId ? 'Guardar cambios' : 'Crear tarea'}</button>{editingId && <button className="btn btn-link w-100" onClick={() => { setEditingId(null); setForm(initialForm) }} type="button">Cancelar</button>}
-        </form></div></div></div>
+        <div className="col-12 col-xl-4"><TaskForm editing={Boolean(editingId)} form={form} subjects={data.subjects} onCancel={() => { setEditingId(null); setForm(initialForm) }} onChange={(field, value) => setForm({ ...form, [field]: value })} onSubmit={submit} /></div>
       </div>
     </>
   )

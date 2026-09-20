@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import EmptyState from '../components/ui/EmptyState.jsx'
 import PageHeader from '../components/ui/PageHeader.jsx'
+import ConfirmButton from '../components/ui/ConfirmButton.jsx'
 import { useAppData } from '../hooks/useAppData.js'
 
 const emptySubject = { name: '', teacher_id: '' }
@@ -48,7 +49,7 @@ const SubjectsPage = () => {
                       <span className="badge bg-light text-dark mb-4">{taskCount} tareas</span>
                       <div className="d-flex gap-2">
                         <button className="btn btn-sm btn-outline-primary" onClick={() => { setEditingId(subject.id); setForm({ name: subject.name, teacher_id: subject.teacher_id }) }} type="button">Editar</button>
-                        <button className="btn btn-sm btn-outline-danger" onClick={() => { removeItem('subjects', subject.id); notify('Materia eliminada.', 'warning') }} type="button">Eliminar</button>
+                        <ConfirmButton message={`¿Eliminar la materia ${subject.name}?`} onConfirm={() => { removeItem('subjects', subject.id); notify('Materia eliminada.', 'warning') }}>Eliminar</ConfirmButton>
                       </div>
                     </div></article>
                   </div>
