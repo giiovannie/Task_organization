@@ -7,3 +7,9 @@ export const calculateDaysRemaining = (date, today = todayDate()) => {
   const todayTime = Date.parse(`${today}T00:00:00Z`)
   return Math.ceil((targetTime - todayTime) / DAY_IN_MS)
 }
+
+export const addDays = (date, days) => {
+  const value = new Date(`${date}T00:00:00Z`)
+  value.setUTCDate(value.getUTCDate() + days)
+  return value.toISOString().slice(0, 10)
+}
