@@ -9,6 +9,7 @@ import { createSubject, deleteSubject, getSubjects, updateSubject } from '../ser
 import { createTaskNote, deleteTaskNote, getTaskNotes, updateTaskNote } from '../services/task-notes.service.js'
 import { createTask, deleteTask, getTasks, updateTask, updateTaskStatus } from '../services/tasks.service.js'
 import { createTeacher, getTeachers } from '../services/teachers.service.js'
+import { applyNotificationReadState, persistNotificationReadState } from '../utils/notificationReadState.js'
 import { AppContext } from './app-context.js'
 
 const emptyProfile = { name: '', last_name: '', nickname: '', avatar_url: '' }
@@ -83,7 +84,7 @@ export const AppProvider = ({ children }) => {
         notes,
         exams,
         activities,
-        notifications,
+        notifications: applyNotificationReadState(notifications, user.id),
       })
     } catch (requestError) {
       if (currentLoadId === loadId.current) setError(requestError.message)
@@ -128,7 +129,11 @@ export const AppProvider = ({ children }) => {
 
   const updateItem = useCallback((collection, id, changes) => {
     if (collection === 'notifications') {
-      setData((current) => ({ ...current, notifications: replaceItem(current.notifications, id, changes) }))
+      setData((current) => {
+        const notifications = replaceItem(current.notifications, id, changes)
+        persistNotificationReadState(notifications, user?.id)
+        return { ...current, notifications }
+      })
       return Promise.resolve(true)
     }
 
@@ -150,7 +155,7 @@ export const AppProvider = ({ children }) => {
       ...current,
       [collection]: replaceItem(current[collection], id, collection === 'subjects' ? normalizeSubject(updated) : updated),
     }))
-  }, [runMutation])
+  }, [runMutation, user?.id])
 
   const removeItem = useCallback((collection, id) => {
     const requests = {
