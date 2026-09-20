@@ -1,12 +1,12 @@
 import 'dotenv/config'
 import { app } from './src/app.js'
-import { sequelize } from './src/config/database.js'
+import { initializeDatabase } from './src/config/initializeDatabase.js'
 
 const port = Number(process.env.PORT) || 3000
 
 const startServer = async () => {
   try {
-    await sequelize.authenticate()
+    await initializeDatabase()
     app.listen(port, () => {
       console.log(`Servidor iniciado en el puerto ${port}`)
     })
