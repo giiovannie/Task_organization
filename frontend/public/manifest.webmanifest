@@ -1,0 +1,25 @@
+{
+  "name": "Organiza - Organizador académico",
+  "short_name": "Organiza",
+  "description": "Centralizá tus materias, tareas, exámenes y actividades de estudio.",
+  "lang": "es-AR",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#faf8f5",
+  "theme_color": "#9a3412",
+  "icons": [
+    {
+      "src": "/icons/organiza-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/organiza-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
