@@ -1,12 +1,12 @@
-import sequelize from '../config/database.js'
-import Exam from './Exam.js'
-import Profile from './Profile.js'
-import StudyActivity from './StudyActivity.js'
-import Subject from './Subject.js'
-import Task from './Task.js'
-import TaskNote from './TaskNote.js'
-import Teacher from './Teacher.js'
-import User from './User.js'
+import { sequelize } from '../config/database.js'
+import { Exam } from './Exam.js'
+import { Profile } from './Profile.js'
+import { StudyActivity } from './StudyActivity.js'
+import { Subject } from './Subject.js'
+import { Task } from './Task.js'
+import { TaskNote } from './TaskNote.js'
+import { Teacher } from './Teacher.js'
+import { User } from './User.js'
 
 User.hasOne(Profile, { foreignKey: 'user_id', as: 'profile', onDelete: 'CASCADE' })
 Profile.belongsTo(User, { foreignKey: 'user_id', as: 'user' })

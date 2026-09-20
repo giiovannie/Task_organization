@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import EmptyState from '../components/ui/EmptyState.jsx'
-import PageHeader from '../components/ui/PageHeader.jsx'
-import ConfirmButton from '../components/ui/ConfirmButton.jsx'
-import ExamForm from '../components/common/ExamForm.jsx'
+import { EmptyState } from '../components/ui/EmptyState.jsx'
+import { PageHeader } from '../components/ui/PageHeader.jsx'
+import { ConfirmButton } from '../components/ui/ConfirmButton.jsx'
+import { ExamForm } from '../components/common/ExamForm.jsx'
 import { useAppData } from '../hooks/useAppData.js'
 import { daysRemaining, formatDate, urgencyClass } from '../utils/date.js'
 
@@ -46,4 +46,4 @@ const ExamsPage = () => {
   )
 }
 
-export default ExamsPage
+export { ExamsPage }

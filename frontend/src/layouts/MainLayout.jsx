@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
-import Sidebar from '../components/common/Sidebar.jsx'
-import Topbar from '../components/common/Topbar.jsx'
-import Toast from '../components/ui/Toast.jsx'
+import { Sidebar } from '../components/common/Sidebar.jsx'
+import { Topbar } from '../components/common/Topbar.jsx'
+import { Toast } from '../components/ui/Toast.jsx'
 import { ErrorState, LoadingState } from '../components/ui/FeedbackState.jsx'
 import { useAppData } from '../hooks/useAppData.js'
 
@@ -43,4 +43,4 @@ const MainLayout = () => {
   )
 }
 
-export default MainLayout
+export { MainLayout }

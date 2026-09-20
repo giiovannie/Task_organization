@@ -26,4 +26,4 @@ router.put('/:id', examIdValidator, updateExamValidator, validateRequest, update
 router.patch('/:id/grade', examIdValidator, examGradeValidator, validateRequest, updateExamGrade)
 router.delete('/:id', examIdValidator, validateRequest, deleteExam)
 
-export default router
+export { router as examRouter }

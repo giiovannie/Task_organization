@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
-import ConfirmButton from './ConfirmButton.jsx'
+import { ConfirmButton } from './ConfirmButton.jsx'
 
 describe('ConfirmButton', () => {
   it('ejecuta la acción solamente cuando el usuario confirma', async () => {

@@ -21,4 +21,4 @@ const ExamForm = ({ editing, form, subjects, onCancel, onChange, onSubmit }) => 
   </div>
 )
 
-export default ExamForm
+export { ExamForm }

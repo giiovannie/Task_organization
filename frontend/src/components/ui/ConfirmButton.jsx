@@ -6,4 +6,4 @@ const ConfirmButton = ({ children, message, onConfirm, className = 'btn btn-sm b
   return <button className={className} onClick={confirm} type="button">{children}</button>
 }
 
-export default ConfirmButton
+export { ConfirmButton }

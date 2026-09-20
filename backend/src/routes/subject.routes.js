@@ -25,4 +25,4 @@ router.post('/', subjectBodyValidator, validateRequest, createSubject)
 router.put('/:id', subjectIdValidator, subjectBodyValidator, validateRequest, updateSubject)
 router.delete('/:id', subjectIdValidator, validateRequest, deleteSubject)
 
-export default router
+export { router as subjectRouter }

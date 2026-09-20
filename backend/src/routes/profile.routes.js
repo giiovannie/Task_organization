@@ -16,4 +16,4 @@ router.get('/:userId', profileUserIdValidator, validateRequest, getProfile)
 router.post('/', createProfileValidator, validateRequest, createProfile)
 router.put('/:id', profileIdValidator, updateProfileValidator, validateRequest, updateProfile)
 
-export default router
+export { router as profileRouter }

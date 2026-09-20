@@ -1,28 +1,28 @@
 import { Router } from 'express'
-import authRoutes from './auth.routes.js'
-import dashboardRoutes from './dashboard.routes.js'
-import examRoutes from './exam.routes.js'
-import profileRoutes from './profile.routes.js'
-import subjectRoutes from './subject.routes.js'
-import studyActivityRoutes from './studyActivity.routes.js'
-import teacherRoutes from './teacher.routes.js'
-import taskRoutes from './task.routes.js'
-import noteRoutes from './note.routes.js'
-import notificationRoutes from './notification.routes.js'
-import userRoutes from './user.routes.js'
+import { authRouter } from './auth.routes.js'
+import { dashboardRouter } from './dashboard.routes.js'
+import { examRouter } from './exam.routes.js'
+import { profileRouter } from './profile.routes.js'
+import { subjectRouter } from './subject.routes.js'
+import { studyActivityRouter } from './studyActivity.routes.js'
+import { teacherRouter } from './teacher.routes.js'
+import { taskRouter } from './task.routes.js'
+import { noteRouter } from './note.routes.js'
+import { notificationRouter } from './notification.routes.js'
+import { userRouter } from './user.routes.js'
 
 const router = Router()
 
-router.use('/auth', authRoutes)
-router.use('/dashboard', dashboardRoutes)
-router.use('/exams', examRoutes)
-router.use('/profiles', profileRoutes)
-router.use('/subjects', subjectRoutes)
-router.use('/study-activities', studyActivityRoutes)
-router.use('/teachers', teacherRoutes)
-router.use('/tasks', taskRoutes)
-router.use('/notes', noteRoutes)
-router.use('/notifications', notificationRoutes)
-router.use('/users', userRoutes)
+router.use('/auth', authRouter)
+router.use('/dashboard', dashboardRouter)
+router.use('/exams', examRouter)
+router.use('/profiles', profileRouter)
+router.use('/subjects', subjectRouter)
+router.use('/study-activities', studyActivityRouter)
+router.use('/teachers', teacherRouter)
+router.use('/tasks', taskRouter)
+router.use('/notes', noteRouter)
+router.use('/notifications', notificationRouter)
+router.use('/users', userRouter)
 
-export default router
+export { router as apiRouter }

@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import { describe, expect, it } from 'vitest'
 import { AuthProvider } from '../context/AuthContext.jsx'
-import LoginPage from './LoginPage.jsx'
+import { LoginPage } from './LoginPage.jsx'
 
 describe('LoginPage', () => {
   it('muestra validaciones accesibles al enviar campos vacíos', async () => {

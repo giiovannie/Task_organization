@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import Brand from '../components/common/Brand.jsx'
+import { Brand } from '../components/common/Brand.jsx'
 
 const AuthLayout = () => (
   <main className="auth-layout min-vh-100 d-flex align-items-center py-5" id="main-content">
@@ -18,4 +18,4 @@ const AuthLayout = () => (
   </main>
 )
 
-export default AuthLayout
+export { AuthLayout }

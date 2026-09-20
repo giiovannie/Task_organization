@@ -21,4 +21,4 @@ const TaskForm = ({ editing, form, subjects, onCancel, onChange, onSubmit }) => 
   </div>
 )
 
-export default TaskForm
+export { TaskForm }

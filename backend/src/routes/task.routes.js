@@ -30,4 +30,4 @@ router.put('/:id', taskIdValidator, updateTaskValidator, validateRequest, update
 router.patch('/:id/status', taskIdValidator, taskStatusValidator, validateRequest, updateTaskStatus)
 router.delete('/:id', taskIdValidator, validateRequest, deleteTask)
 
-export default router
+export { router as taskRouter }

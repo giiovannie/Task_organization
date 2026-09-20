@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize'
-import sequelize from '../config/database.js'
+import { sequelize } from '../config/database.js'
 
 const Profile = sequelize.define('Profile', {
   id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true },
@@ -11,4 +11,4 @@ const Profile = sequelize.define('Profile', {
   user_id: { type: DataTypes.INTEGER.UNSIGNED, allowNull: false, unique: true },
 }, { tableName: 'profiles' })
 
-export default Profile
+export { Profile }

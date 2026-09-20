@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize'
-import sequelize from '../config/database.js'
+import { sequelize } from '../config/database.js'
 
 const StudyActivity = sequelize.define('StudyActivity', {
   id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true },
@@ -13,4 +13,4 @@ const StudyActivity = sequelize.define('StudyActivity', {
   subject_id: { type: DataTypes.INTEGER.UNSIGNED, allowNull: false },
 }, { tableName: 'study_activities' })
 
-export default StudyActivity
+export { StudyActivity }

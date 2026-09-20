@@ -9,4 +9,4 @@ const StatCard = ({ label, value, detail, tone = 'primary' }) => (
   </div>
 )
 
-export default StatCard
+export { StatCard }

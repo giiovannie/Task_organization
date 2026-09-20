@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react'
-import EmptyState from '../components/ui/EmptyState.jsx'
-import PageHeader from '../components/ui/PageHeader.jsx'
-import ConfirmButton from '../components/ui/ConfirmButton.jsx'
-import TaskForm from '../components/common/TaskForm.jsx'
+import { EmptyState } from '../components/ui/EmptyState.jsx'
+import { PageHeader } from '../components/ui/PageHeader.jsx'
+import { ConfirmButton } from '../components/ui/ConfirmButton.jsx'
+import { TaskForm } from '../components/common/TaskForm.jsx'
 import { useAppData } from '../hooks/useAppData.js'
 import { formatDate } from '../utils/date.js'
 
@@ -62,4 +62,4 @@ const TasksPage = () => {
   )
 }
 
-export default TasksPage
+export { TasksPage }

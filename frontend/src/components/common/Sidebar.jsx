@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import Brand from './Brand.jsx'
+import { Brand } from './Brand.jsx'
 
 const links = [
   ['/', 'Resumen', '⌂'],
@@ -31,4 +31,4 @@ const Sidebar = ({ onNavigate }) => (
   </aside>
 )
 
-export default Sidebar
+export { Sidebar }

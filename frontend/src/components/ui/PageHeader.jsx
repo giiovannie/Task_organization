@@ -15,4 +15,4 @@ const PageHeader = ({ eyebrow, title, description, children }) => {
   )
 }
 
-export default PageHeader
+export { PageHeader }

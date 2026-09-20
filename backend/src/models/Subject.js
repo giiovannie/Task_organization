@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize'
-import sequelize from '../config/database.js'
+import { sequelize } from '../config/database.js'
 
 const Subject = sequelize.define('Subject', {
   id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true },
@@ -8,4 +8,4 @@ const Subject = sequelize.define('Subject', {
   user_id: { type: DataTypes.INTEGER.UNSIGNED, allowNull: false },
 }, { tableName: 'subjects' })
 
-export default Subject
+export { Subject }

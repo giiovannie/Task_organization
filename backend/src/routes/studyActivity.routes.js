@@ -19,4 +19,4 @@ router.get('/', getStudyActivities)
 router.post('/', createActivityValidator, validateRequest, createStudyActivity)
 router.patch('/:id/status', activityIdValidator, activityStatusValidator, validateRequest, updateStudyActivityStatus)
 
-export default router
+export { router as studyActivityRouter }

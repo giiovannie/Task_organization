@@ -6,4 +6,4 @@ const router = Router()
 
 router.get('/upcoming', authenticate, getUpcoming)
 
-export default router
+export { router as dashboardRouter }

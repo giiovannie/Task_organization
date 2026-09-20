@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import EmptyState from '../components/ui/EmptyState.jsx'
-import PageHeader from '../components/ui/PageHeader.jsx'
+import { EmptyState } from '../components/ui/EmptyState.jsx'
+import { PageHeader } from '../components/ui/PageHeader.jsx'
 import { useAppData } from '../hooks/useAppData.js'
 import { formatDate } from '../utils/date.js'
 
@@ -33,4 +33,4 @@ const StudyPage = () => {
   )
 }
 
-export default StudyPage
+export { StudyPage }

@@ -7,4 +7,4 @@ const router = Router()
 
 router.post('/login', loginValidator, validateRequest, login)
 
-export default router
+export { router as authRouter }

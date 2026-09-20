@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import EmptyState from '../components/ui/EmptyState.jsx'
-import PageHeader from '../components/ui/PageHeader.jsx'
-import ConfirmButton from '../components/ui/ConfirmButton.jsx'
+import { EmptyState } from '../components/ui/EmptyState.jsx'
+import { PageHeader } from '../components/ui/PageHeader.jsx'
+import { ConfirmButton } from '../components/ui/ConfirmButton.jsx'
 import { useAppData } from '../hooks/useAppData.js'
 
 const emptySubject = { name: '', teacher_id: '' }
@@ -82,4 +82,4 @@ const SubjectsPage = () => {
   )
 }
 
-export default SubjectsPage
+export { SubjectsPage }

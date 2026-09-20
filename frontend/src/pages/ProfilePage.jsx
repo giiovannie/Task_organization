@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import PageHeader from '../components/ui/PageHeader.jsx'
+import { PageHeader } from '../components/ui/PageHeader.jsx'
 import { useAppData } from '../hooks/useAppData.js'
 import { useAuth } from '../hooks/useAuth.js'
 
@@ -29,4 +29,4 @@ const ProfilePage = () => {
   )
 }
 
-export default ProfilePage
+export { ProfilePage }

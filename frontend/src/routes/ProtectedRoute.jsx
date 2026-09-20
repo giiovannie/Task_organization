@@ -8,4 +8,4 @@ const ProtectedRoute = () => {
   return user ? <Outlet /> : <Navigate replace state={{ from: location }} to="/login" />
 }
 
-export default ProtectedRoute
+export { ProtectedRoute }

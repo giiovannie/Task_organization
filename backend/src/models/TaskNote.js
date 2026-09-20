@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize'
-import sequelize from '../config/database.js'
+import { sequelize } from '../config/database.js'
 
 const TaskNote = sequelize.define('TaskNote', {
   id: { type: DataTypes.INTEGER.UNSIGNED, autoIncrement: true, primaryKey: true },
@@ -7,4 +7,4 @@ const TaskNote = sequelize.define('TaskNote', {
   task_id: { type: DataTypes.INTEGER.UNSIGNED, allowNull: false },
 }, { tableName: 'task_notes' })
 
-export default TaskNote
+export { TaskNote }

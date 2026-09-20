@@ -1,5 +1,5 @@
-import EmptyState from '../components/ui/EmptyState.jsx'
-import PageHeader from '../components/ui/PageHeader.jsx'
+import { EmptyState } from '../components/ui/EmptyState.jsx'
+import { PageHeader } from '../components/ui/PageHeader.jsx'
 import { useAppData } from '../hooks/useAppData.js'
 
 const icons = { exam: '◫', task: '✓', study: '◎' }
@@ -25,4 +25,4 @@ const NotificationsPage = () => {
   )
 }
 
-export default NotificationsPage
+export { NotificationsPage }

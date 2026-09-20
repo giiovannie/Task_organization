@@ -7,4 +7,4 @@ const Toast = () => {
   return <div aria-atomic="true" aria-live="polite" className={`app-toast alert alert-${toast.variant} shadow`} role="status">{toast.message}</div>
 }
 
-export default Toast
+export { Toast }

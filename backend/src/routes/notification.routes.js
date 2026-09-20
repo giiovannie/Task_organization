@@ -6,4 +6,4 @@ const router = Router()
 
 router.get('/', authenticate, getNotifications)
 
-export default router
+export { router as notificationRouter }

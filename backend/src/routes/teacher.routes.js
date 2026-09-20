@@ -10,4 +10,4 @@ router.use(authenticate)
 router.get('/', getTeachers)
 router.post('/', createTeacherValidator, validateRequest, createTeacher)
 
-export default router
+export { router as teacherRouter }

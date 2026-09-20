@@ -9,4 +9,4 @@ const router = Router()
 router.post('/', createUserValidator, validateRequest, createUser)
 router.get('/:id', authenticate, userIdValidator, validateRequest, getUser)
 
-export default router
+export { router as userRouter }

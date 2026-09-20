@@ -10,4 +10,4 @@ router.use(authenticate)
 router.put('/:id', noteIdValidator, noteBodyValidator, validateRequest, updateTaskNote)
 router.delete('/:id', noteIdValidator, validateRequest, deleteTaskNote)
 
-export default router
+export { router as noteRouter }

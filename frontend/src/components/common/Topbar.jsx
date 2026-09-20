@@ -25,4 +25,4 @@ const Topbar = ({ onMenu }) => {
   )
 }
 
-export default Topbar
+export { Topbar }

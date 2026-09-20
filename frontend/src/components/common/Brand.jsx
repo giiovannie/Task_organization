@@ -7,4 +7,4 @@ const Brand = () => (
   </Link>
 )
 
-export default Brand
+export { Brand }

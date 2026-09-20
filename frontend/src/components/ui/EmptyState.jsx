@@ -6,4 +6,4 @@ const EmptyState = ({ title, message }) => (
   </div>
 )
 
-export default EmptyState
+export { EmptyState }

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import PageHeader from '../components/ui/PageHeader.jsx'
-import StatCard from '../components/ui/StatCard.jsx'
+import { PageHeader } from '../components/ui/PageHeader.jsx'
+import { StatCard } from '../components/ui/StatCard.jsx'
 import { useAppData } from '../hooks/useAppData.js'
 import { daysRemaining, formatDate, urgencyClass } from '../utils/date.js'
 
@@ -51,4 +51,4 @@ const DashboardPage = () => {
   )
 }
 
-export default DashboardPage
+export { DashboardPage }
