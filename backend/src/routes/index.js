@@ -8,6 +8,7 @@ import studyActivityRoutes from './studyActivity.routes.js'
 import teacherRoutes from './teacher.routes.js'
 import taskRoutes from './task.routes.js'
 import noteRoutes from './note.routes.js'
+import notificationRoutes from './notification.routes.js'
 import userRoutes from './user.routes.js'
 
 const router = Router()
@@ -21,6 +22,7 @@ router.use('/study-activities', studyActivityRoutes)
 router.use('/teachers', teacherRoutes)
 router.use('/tasks', taskRoutes)
 router.use('/notes', noteRoutes)
+router.use('/notifications', notificationRoutes)
 router.use('/users', userRoutes)
 
 export default router
