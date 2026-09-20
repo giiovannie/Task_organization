@@ -12,13 +12,14 @@ const MainLayout = () => {
 
   return (
     <div className="app-shell min-vh-100">
+      <a className="skip-link" href="#main-content">Saltar al contenido principal</a>
       <div className={`sidebar-panel ${menuOpen ? 'is-open' : ''}`}>
         <Sidebar onNavigate={() => setMenuOpen(false)} />
       </div>
       {menuOpen && <button className="sidebar-backdrop" onClick={() => setMenuOpen(false)} type="button" aria-label="Cerrar navegación" />}
       <div className="app-content">
         <Topbar onMenu={() => setMenuOpen(true)} />
-        <main className="p-3 p-md-4 p-xl-5">
+        <main className="p-3 p-md-4 p-xl-5" id="main-content" tabIndex="-1">
           <div className="content-container">
             {isLoading ? <LoadingState message="Preparando tu espacio académico…" /> : error ? <ErrorState message={error} onRetry={retry} /> : <Outlet />}
           </div>

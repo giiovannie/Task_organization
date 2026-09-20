@@ -39,10 +39,10 @@ const ExamsPage = () => {
           )}
         </div>
         <div className="col-12 col-xl-4"><div className="card border-0 form-card sticky-xl-top"><div className="card-body p-4"><h2 className="h5 mb-3">{editingId ? 'Editar examen' : 'Nuevo examen'}</h2><form onSubmit={submit}>
-          <label className="form-label">Título *</label><input className="form-control mb-3" value={form.title} onChange={(event) => setForm({ ...form, title: event.target.value })} />
-          <label className="form-label">Materia *</label><select className="form-select mb-3" value={form.subject_id} onChange={(event) => setForm({ ...form, subject_id: event.target.value })}><option value="">Seleccionar</option>{data.subjects.map((subject) => <option key={subject.id} value={subject.id}>{subject.name}</option>)}</select>
-          <label className="form-label">Fecha *</label><input className="form-control mb-3" type="date" value={form.exam_date} onChange={(event) => setForm({ ...form, exam_date: event.target.value })} />
-          <label className="form-label">Temas</label><textarea className="form-control mb-3" rows="3" value={form.topics} onChange={(event) => setForm({ ...form, topics: event.target.value })} />
+          <label className="form-label" htmlFor="exam-title">Título *</label><input className="form-control mb-3" id="exam-title" required value={form.title} onChange={(event) => setForm({ ...form, title: event.target.value })} />
+          <label className="form-label" htmlFor="exam-subject">Materia *</label><select className="form-select mb-3" id="exam-subject" required value={form.subject_id} onChange={(event) => setForm({ ...form, subject_id: event.target.value })}><option value="">Seleccionar</option>{data.subjects.map((subject) => <option key={subject.id} value={subject.id}>{subject.name}</option>)}</select>
+          <label className="form-label" htmlFor="exam-date">Fecha *</label><input className="form-control mb-3" id="exam-date" required type="date" value={form.exam_date} onChange={(event) => setForm({ ...form, exam_date: event.target.value })} />
+          <label className="form-label" htmlFor="exam-topics">Temas</label><textarea className="form-control mb-3" id="exam-topics" rows="3" value={form.topics} onChange={(event) => setForm({ ...form, topics: event.target.value })} />
           <button className="btn btn-primary w-100" type="submit">{editingId ? 'Guardar cambios' : 'Crear examen'}</button>{editingId && <button className="btn btn-link w-100" onClick={() => { setEditingId(null); setForm(initialForm) }} type="button">Cancelar</button>}
         </form></div></div></div>
       </div>

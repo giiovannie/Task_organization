@@ -32,6 +32,29 @@ a {
   color: var(--color-primary);
 }
 
+:focus-visible {
+  outline: 3px solid var(--color-info);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 2000;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.7rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--text-main);
+  color: white;
+  transform: translateY(-180%);
+  transition: transform 150ms ease;
+}
+
+.skip-link:focus {
+  color: white;
+  transform: translateY(0);
+}
+
 .card {
   border-radius: 1rem;
   box-shadow: 0 0.35rem 1.4rem rgb(39 28 25 / 5%);
@@ -278,4 +301,15 @@ a {
   .app-topbar { padding-inline: 0.75rem !important; }
   .metric-card .card-body { padding: 0.9rem !important; }
   .display-6 { font-size: 1.55rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
