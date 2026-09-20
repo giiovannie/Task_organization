@@ -13,6 +13,7 @@ const TasksPage = () => {
   const [form, setForm] = useState(initialForm)
   const [editingId, setEditingId] = useState(null)
   const [noteDrafts, setNoteDrafts] = useState({})
+  const [editingNote, setEditingNote] = useState({ id: null, content: '' })
   const visibleTasks = useMemo(() => filter === 'all' ? data.tasks : data.tasks.filter(({ status }) => status === filter), [data.tasks, filter])
 
   const submit = (event) => {
@@ -49,7 +50,7 @@ const TasksPage = () => {
                   <button className="btn btn-sm btn-outline-danger" onClick={() => removeItem('tasks', task.id)} type="button">Eliminar</button>
                 </div>
               </div>
-              <div className="task-notes mt-3 pt-3 border-top"><strong className="small">Notas</strong>{data.notes.filter(({ task_id }) => task_id === task.id).map((note) => <div className="note-row" key={note.id}><span>{note.content}</span><button className="btn btn-sm btn-link text-danger" onClick={() => removeItem('notes', note.id)} type="button">Eliminar</button></div>)}<div className="input-group input-group-sm mt-2"><input className="form-control" value={noteDrafts[task.id] ?? ''} onChange={(event) => setNoteDrafts({ ...noteDrafts, [task.id]: event.target.value })} placeholder="Nueva nota" /><button className="btn btn-outline-secondary" onClick={() => addNote(task.id)} type="button">Agregar</button></div></div>
+              <div className="task-notes mt-3 pt-3 border-top"><strong className="small">Notas</strong>{data.notes.filter(({ task_id }) => task_id === task.id).map((note) => <div className="note-row" key={note.id}>{editingNote.id === note.id ? <div className="input-group input-group-sm"><input className="form-control" value={editingNote.content} onChange={(event) => setEditingNote({ ...editingNote, content: event.target.value })} /><button className="btn btn-outline-primary" onClick={() => { updateItem('notes', note.id, { content: editingNote.content }); setEditingNote({ id: null, content: '' }); notify('Nota actualizada.') }} type="button">Guardar</button></div> : <><span>{note.content}</span><span><button className="btn btn-sm btn-link" onClick={() => setEditingNote({ id: note.id, content: note.content })} type="button">Editar</button><button className="btn btn-sm btn-link text-danger" onClick={() => removeItem('notes', note.id)} type="button">Eliminar</button></span></>}</div>)}<div className="input-group input-group-sm mt-2"><input className="form-control" value={noteDrafts[task.id] ?? ''} onChange={(event) => setNoteDrafts({ ...noteDrafts, [task.id]: event.target.value })} placeholder="Nueva nota" /><button className="btn btn-outline-secondary" onClick={() => addNote(task.id)} type="button">Agregar</button></div></div>
             </div></article>
           ))}
         </div>
