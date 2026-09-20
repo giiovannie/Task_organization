@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { initialData } from '../data/demoData.js'
 import { AppContext } from './app-context.js'
 
@@ -7,6 +7,13 @@ const nextId = (items) => Math.max(0, ...items.map(({ id }) => id)) + 1
 export const AppProvider = ({ children }) => {
   const [data, setData] = useState(initialData)
   const [toast, setToast] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setIsLoading(false), 450)
+    return () => window.clearTimeout(timer)
+  }, [])
 
   const notify = useCallback((message, variant = 'success') => {
     setToast({ message, variant })
@@ -38,8 +45,14 @@ export const AppProvider = ({ children }) => {
     setData((current) => ({ ...current, profile: { ...current.profile, ...profile } }))
   }, [])
 
-  const value = useMemo(() => ({ data, toast, notify, addItem, updateItem, removeItem, updateProfile }), [
-    data, toast, notify, addItem, updateItem, removeItem, updateProfile,
+  const retry = useCallback(() => {
+    setError(null)
+    setIsLoading(true)
+    window.setTimeout(() => setIsLoading(false), 450)
+  }, [])
+
+  const value = useMemo(() => ({ data, toast, isLoading, error, setError, retry, notify, addItem, updateItem, removeItem, updateProfile }), [
+    data, toast, isLoading, error, retry, notify, addItem, updateItem, removeItem, updateProfile,
   ])
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>

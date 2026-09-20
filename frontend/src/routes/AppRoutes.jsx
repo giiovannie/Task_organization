@@ -11,6 +11,7 @@ import RegisterPage from '../pages/RegisterPage.jsx'
 import StudyPage from '../pages/StudyPage.jsx'
 import SubjectsPage from '../pages/SubjectsPage.jsx'
 import TasksPage from '../pages/TasksPage.jsx'
+import ProtectedRoute from './ProtectedRoute.jsx'
 
 const AppRoutes = () => (
   <Routes>
@@ -18,14 +19,16 @@ const AppRoutes = () => (
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
     </Route>
-    <Route element={<MainLayout />}>
-      <Route index element={<DashboardPage />} />
-      <Route path="subjects" element={<SubjectsPage />} />
-      <Route path="tasks" element={<TasksPage />} />
-      <Route path="exams" element={<ExamsPage />} />
-      <Route path="study" element={<StudyPage />} />
-      <Route path="notifications" element={<NotificationsPage />} />
-      <Route path="profile" element={<ProfilePage />} />
+    <Route element={<ProtectedRoute />}>
+      <Route element={<MainLayout />}>
+        <Route index element={<DashboardPage />} />
+        <Route path="subjects" element={<SubjectsPage />} />
+        <Route path="tasks" element={<TasksPage />} />
+        <Route path="exams" element={<ExamsPage />} />
+        <Route path="study" element={<StudyPage />} />
+        <Route path="notifications" element={<NotificationsPage />} />
+        <Route path="profile" element={<ProfilePage />} />
+      </Route>
     </Route>
     <Route path="/home" element={<Navigate replace to="/" />} />
     <Route path="*" element={<NotFoundPage />} />
