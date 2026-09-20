@@ -6,16 +6,27 @@ import { hasErrors, validateRegistration } from '../utils/validators.js'
 const RegisterPage = () => {
   const [form, setForm] = useState({ email: '', password: '', confirmation: '' })
   const [errors, setErrors] = useState({})
+  const [requestError, setRequestError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const { signUp } = useAuth()
   const navigate = useNavigate()
 
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault()
     const validation = validateRegistration(form)
     setErrors(validation)
     if (hasErrors(validation)) return
-    signUp(form.email)
-    navigate('/profile')
+
+    setRequestError('')
+    setIsSubmitting(true)
+    try {
+      await signUp({ email: form.email, password: form.password })
+      navigate('/profile')
+    } catch (error) {
+      setRequestError(error.message)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -36,7 +47,10 @@ const RegisterPage = () => {
               <div className="invalid-feedback" id={`register-${field}-error`}>{errors[field]}</div>
             </div>
           ))}
-          <button className="btn btn-primary w-100 mt-2" type="submit">Crear cuenta</button>
+          {requestError && <div className="alert alert-danger" role="alert">{requestError}</div>}
+          <button className="btn btn-primary w-100 mt-2" disabled={isSubmitting} type="submit">
+            {isSubmitting ? 'Creando cuenta...' : 'Crear cuenta'}
+          </button>
         </form>
         <p className="text-center mt-4 mb-0">¿Ya tenés cuenta? <Link to="/login">Iniciá sesión</Link></p>
       </div>

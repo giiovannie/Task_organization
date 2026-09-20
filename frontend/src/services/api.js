@@ -1,3 +1,5 @@
+import { getAccessToken } from '../utils/authSession.js'
+
 export const API_URL = import.meta.env.VITE_API_URL ?? ''
 
 export class ApiError extends Error {
@@ -9,10 +11,12 @@ export class ApiError extends Error {
 }
 
 export const apiRequest = async (path, options = {}) => {
+  const token = getAccessToken()
   const response = await fetch(`${API_URL}${path}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...options.headers,
     },
   })

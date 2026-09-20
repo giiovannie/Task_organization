@@ -6,16 +6,27 @@ import { hasErrors, validateLogin } from '../utils/validators.js'
 const LoginPage = () => {
   const [form, setForm] = useState({ email: '', password: '' })
   const [errors, setErrors] = useState({})
+  const [requestError, setRequestError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const { signIn } = useAuth()
   const navigate = useNavigate()
 
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault()
     const validation = validateLogin(form)
     setErrors(validation)
     if (hasErrors(validation)) return
-    signIn(form.email)
-    navigate('/')
+
+    setRequestError('')
+    setIsSubmitting(true)
+    try {
+      await signIn(form)
+      navigate('/')
+    } catch (error) {
+      setRequestError(error.message)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -31,7 +42,10 @@ const LoginPage = () => {
           <label className="form-label" htmlFor="login-password">Contraseña</label>
           <input aria-describedby={errors.password ? 'login-password-error' : undefined} aria-invalid={Boolean(errors.password)} autoComplete="current-password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} id="login-password" type="password" value={form.password} onChange={(event) => setForm({ ...form, password: event.target.value })} placeholder="••••••••" />
           <div className="invalid-feedback mb-4" id="login-password-error">{errors.password}</div>
-          <button className="btn btn-primary w-100" type="submit">Ingresar</button>
+          {requestError && <div className="alert alert-danger" role="alert">{requestError}</div>}
+          <button className="btn btn-primary w-100" disabled={isSubmitting} type="submit">
+            {isSubmitting ? 'Ingresando...' : 'Ingresar'}
+          </button>
         </form>
         <p className="text-center mt-4 mb-0">¿No tenés cuenta? <Link to="/register">Registrate</Link></p>
       </div>
