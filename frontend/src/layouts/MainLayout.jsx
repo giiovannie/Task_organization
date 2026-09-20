@@ -19,7 +19,9 @@ const MainLayout = () => {
       <div className="app-content">
         <Topbar onMenu={() => setMenuOpen(true)} />
         <main className="p-3 p-md-4 p-xl-5">
-          {isLoading ? <LoadingState message="Preparando tu espacio académico…" /> : error ? <ErrorState message={error} onRetry={retry} /> : <Outlet />}
+          <div className="content-container">
+            {isLoading ? <LoadingState message="Preparando tu espacio académico…" /> : error ? <ErrorState message={error} onRetry={retry} /> : <Outlet />}
+          </div>
         </main>
       </div>
       <Toast />
