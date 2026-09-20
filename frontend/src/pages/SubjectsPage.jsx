@@ -62,9 +62,9 @@ const SubjectsPage = () => {
             <h2 className="h5 mb-3">{editingId ? 'Editar materia' : 'Nueva materia'}</h2>
             <form onSubmit={submitSubject}>
               <label className="form-label" htmlFor="subject-name">Nombre</label>
-              <input className="form-control mb-3" id="subject-name" value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} />
+              <input className="form-control mb-3" id="subject-name" required value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} />
               <label className="form-label" htmlFor="subject-teacher">Profesor</label>
-              <select className="form-select mb-3" id="subject-teacher" value={form.teacher_id} onChange={(event) => setForm({ ...form, teacher_id: event.target.value })}>
+              <select className="form-select mb-3" id="subject-teacher" required value={form.teacher_id} onChange={(event) => setForm({ ...form, teacher_id: event.target.value })}>
                 <option value="">Seleccionar</option>{data.teachers.map((teacher) => <option key={teacher.id} value={teacher.id}>{teacher.name}</option>)}
               </select>
               <button className="btn btn-primary w-100" type="submit">{editingId ? 'Guardar cambios' : 'Crear materia'}</button>
@@ -73,7 +73,7 @@ const SubjectsPage = () => {
           </div></div>
           <div className="card border-0"><div className="card-body p-4">
             <h2 className="h6 mb-3">Agregar profesor</h2>
-            <form className="d-flex gap-2" onSubmit={submitTeacher}><input className="form-control" value={teacherName} onChange={(event) => setTeacherName(event.target.value)} placeholder="Nombre completo" /><button className="btn btn-secondary" type="submit">Agregar</button></form>
+            <form className="d-flex gap-2" onSubmit={submitTeacher}><label className="visually-hidden" htmlFor="teacher-name">Nombre del profesor</label><input className="form-control" id="teacher-name" required value={teacherName} onChange={(event) => setTeacherName(event.target.value)} placeholder="Nombre completo" /><button className="btn btn-secondary" type="submit">Agregar</button></form>
           </div></div>
         </div>
       </div>

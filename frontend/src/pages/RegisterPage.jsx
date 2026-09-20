@@ -1,17 +1,19 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth.js'
+import { hasErrors, validateRegistration } from '../utils/validators.js'
 
 const RegisterPage = () => {
   const [form, setForm] = useState({ email: '', password: '', confirmation: '' })
-  const [error, setError] = useState('')
+  const [errors, setErrors] = useState({})
   const { signUp } = useAuth()
   const navigate = useNavigate()
 
   const submit = (event) => {
     event.preventDefault()
-    if (!form.email || !form.password) return setError('Completá los campos obligatorios.')
-    if (form.password !== form.confirmation) return setError('Las contraseñas no coinciden.')
+    const validation = validateRegistration(form)
+    setErrors(validation)
+    if (hasErrors(validation)) return
     signUp(form.email)
     navigate('/profile')
   }
@@ -22,8 +24,7 @@ const RegisterPage = () => {
         <p className="section-eyebrow mb-2">Empezá hoy</p>
         <h1 className="h3 mb-2">Creá tu cuenta</h1>
         <p className="text-secondary mb-4">Tu información académica, más ordenada.</p>
-        {error && <div className="alert alert-danger py-2">{error}</div>}
-        <form onSubmit={submit}>
+        <form onSubmit={submit} noValidate>
           {[
             ['email', 'Email', 'email'],
             ['password', 'Contraseña', 'password'],
@@ -31,7 +32,8 @@ const RegisterPage = () => {
           ].map(([field, label, type]) => (
             <div className="mb-3" key={field}>
               <label className="form-label" htmlFor={`register-${field}`}>{label}</label>
-              <input className="form-control" id={`register-${field}`} type={type} value={form[field]} onChange={(event) => setForm({ ...form, [field]: event.target.value })} />
+              <input aria-describedby={errors[field] ? `register-${field}-error` : undefined} aria-invalid={Boolean(errors[field])} autoComplete={field === 'email' ? 'email' : 'new-password'} className={`form-control ${errors[field] ? 'is-invalid' : ''}`} id={`register-${field}`} type={type} value={form[field]} onChange={(event) => setForm({ ...form, [field]: event.target.value })} />
+              <div className="invalid-feedback" id={`register-${field}-error`}>{errors[field]}</div>
             </div>
           ))}
           <button className="btn btn-primary w-100 mt-2" type="submit">Crear cuenta</button>
