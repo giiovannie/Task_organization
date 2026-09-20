@@ -209,3 +209,27 @@ Ante conflictos entre instrucciones, utilizar este orden:
 4. Archivo específico del agente
 5. Código existente
 ```
+## Uso de Engram
+
+Engram se utilizará como memoria persistente del proyecto.
+
+Los agentes deberán guardar únicamente información relevante para futuras sesiones, como:
+
+- decisiones de arquitectura;
+- convenciones nuevas;
+- cambios importantes del proyecto;
+- errores relevantes y su solución;
+- dependencias entre módulos;
+- estado de funcionalidades;
+- restricciones que deban mantenerse;
+- decisiones que afecten Frontend y Backend.
+
+No se deberá guardar en Engram:
+
+- cada comando ejecutado;
+- cada archivo leído;
+- cambios triviales;
+- información que ya esté claramente documentada y no haya cambiado;
+- secretos, credenciales o contenido de `.env`.
+
+Al finalizar una tarea importante, el agente deberá guardar un resumen breve del estado alcanzado y de las decisiones tomadas.
