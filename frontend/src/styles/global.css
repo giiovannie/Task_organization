@@ -56,8 +56,8 @@ a {
 }
 
 .card {
-  border-radius: 1rem;
-  box-shadow: 0 0.35rem 1.4rem rgb(39 28 25 / 5%);
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgb(30 41 59 / 5%);
 }
 
 .app-shell {
@@ -70,7 +70,7 @@ a {
   top: 0;
   height: 100dvh;
   background: var(--bg-card);
-  border-right: 1px solid rgb(39 28 25 / 8%);
+  border-right: 1px solid rgb(30 41 59 / 8%);
 }
 
 .app-sidebar .nav-link {
@@ -85,7 +85,7 @@ a {
 }
 
 .app-sidebar .nav-link.active {
-  background: rgb(154 52 18 / 10%);
+  background: rgb(15 118 110 / 10%);
   color: var(--color-primary);
 }
 
@@ -111,8 +111,8 @@ a {
   z-index: 20;
   top: 0;
   min-height: 4.6rem;
-  background: rgb(250 248 245 / 92%);
-  border-bottom: 1px solid rgb(39 28 25 / 7%);
+  background: rgb(248 250 252 / 92%);
+  border-bottom: 1px solid rgb(30 41 59 / 7%);
   backdrop-filter: blur(12px);
 }
 
@@ -171,7 +171,7 @@ a {
 .subject-card:hover,
 .exam-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0.75rem 2rem rgb(39 28 25 / 9%);
+  box-shadow: 0 0.75rem 2rem rgb(30 41 59 / 9%);
 }
 
 .metric-dot,
@@ -195,7 +195,7 @@ a {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.75rem 0;
-  border-bottom: 1px solid rgb(39 28 25 / 7%);
+  border-bottom: 1px solid rgb(30 41 59 / 7%);
 }
 
 .note-row > :first-child {
@@ -221,6 +221,11 @@ a {
 .status-pending { background: var(--color-warning); }
 .status-in_progress { background: var(--color-info); }
 .status-completed { background: var(--color-success); }
+
+.status-pending,
+.status-completed {
+  color: var(--text-main);
+}
 
 .is-complete h2,
 .is-complete h6 {
@@ -249,13 +254,13 @@ a {
   gap: 1rem;
   padding: 1rem;
   border: 0;
-  border-bottom: 1px solid rgb(39 28 25 / 7%);
+  border-bottom: 1px solid rgb(30 41 59 / 7%);
   background: transparent;
 }
 
 .notification-row.is-unread {
   border-radius: 0.75rem;
-  background: rgb(154 52 18 / 6%);
+  background: rgb(15 118 110 / 6%);
 }
 
 .activity-check {
@@ -264,7 +269,7 @@ a {
 }
 
 .form-card { top: 6.5rem; }
-.auth-layout { background: radial-gradient(circle at top, rgb(202 138 4 / 12%), transparent 40%), var(--bg-main); }
+.auth-layout { background: var(--bg-secondary); }
 .auth-card { overflow: hidden; }
 .app-toast { position: fixed; z-index: 1100; right: 1.5rem; bottom: 1.5rem; min-width: 16rem; }
 .place-center { place-items: center; }
@@ -274,8 +279,8 @@ a {
   .app-shell { display: block; }
   .sidebar-panel { position: fixed; z-index: 1040; inset: 0 auto 0 0; width: min(18rem, 86vw); transform: translateX(-100%); transition: transform 180ms ease; }
   .sidebar-panel.is-open { transform: translateX(0); }
-  .sidebar-backdrop { position: fixed; z-index: 1030; inset: 0; display: block; border: 0; background: rgb(39 28 25 / 45%); }
-  .app-sidebar { width: 100%; box-shadow: 1rem 0 3rem rgb(39 28 25 / 14%); }
+  .sidebar-backdrop { position: fixed; z-index: 1030; inset: 0; display: block; border: 0; background: rgb(30 41 59 / 45%); }
+  .app-sidebar { width: 100%; box-shadow: 1rem 0 3rem rgb(30 41 59 / 14%); }
   .form-card { position: static !important; }
 }
 

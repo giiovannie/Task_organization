@@ -1,13 +1,13 @@
 {
-  "name": "Organiza - Organizador académico",
-  "short_name": "Organiza",
+  "name": "Fokus - Organizador académico",
+  "short_name": "Fokus",
   "description": "Centralizá tus materias, tareas, exámenes y actividades de estudio.",
   "lang": "es-AR",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#faf8f5",
-  "theme_color": "#9a3412",
+  "background_color": "#F8FAFC",
+  "theme_color": "#0F766E",
   "icons": [
     {
       "src": "/icons/organiza-192.png",

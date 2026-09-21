@@ -27,7 +27,7 @@ const Sidebar = ({ onNavigate }) => (
         </NavLink>
       ))}
     </nav>
-    <p className="small text-secondary px-2 mt-auto mb-0">Organiza · 2026</p>
+    <p className="small text-secondary px-2 mt-auto mb-0">Fokus · 2026</p>
   </aside>
 )
 

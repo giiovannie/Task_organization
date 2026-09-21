@@ -17,7 +17,7 @@ const ProfilePage = () => {
 
   return (
     <>
-      <PageHeader eyebrow="Cuenta" title="Tu perfil" description="Personalizá cómo querés verte en Organiza." />
+      <PageHeader eyebrow="Cuenta" title="Tu perfil" description="Personalizá cómo querés verte en Fokus." />
       <div className="row g-4">
         <div className="col-12 col-lg-4"><div className="card border-0 text-center"><div className="card-body p-4"><div className="profile-avatar mx-auto mb-3">{form.name.charAt(0)}{form.last_name.charAt(0)}</div><h2 className="h5 mb-1">{form.name} {form.last_name}</h2><p className="text-secondary">@{form.nickname}</p><p className="small mb-4">{user?.email}</p><button className="btn btn-outline-danger" onClick={() => { signOut(); navigate('/login') }} type="button">Cerrar sesión</button></div></div></div>
         <div className="col-12 col-lg-8"><div className="card border-0"><div className="card-body p-4 p-md-5"><h2 className="h5 mb-4">Información personal</h2><form onSubmit={submit}><div className="row g-3">
