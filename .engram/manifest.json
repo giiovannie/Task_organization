@@ -16,6 +16,14 @@
       "sessions": 1,
       "memories": 2,
       "prompts": 0
+    },
+    {
+      "id": "52550c8c",
+      "created_by": "IPF-2026",
+      "created_at": "2026-09-21T19:29:15Z",
+      "sessions": 1,
+      "memories": 1,
+      "prompts": 0
     }
   ]
 }
