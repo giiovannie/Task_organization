@@ -1,0 +1,3 @@
+[mcp_servers.engram]
+command = "engram"
+args = ["mcp", "--project=task_organization", "--tools=agent"]
