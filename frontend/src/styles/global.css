@@ -18,14 +18,11 @@ body {
   min-height: 100vh;
 }
 
-.brand-mark {
-  display: inline-grid;
-  width: 2rem;
-  height: 2rem;
-  place-items: center;
-  border-radius: 0.65rem;
-  background-color: var(--color-primary);
-  color: var(--bg-card);
+.brand-logo {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: contain;
+  flex: 0 0 auto;
 }
 
 a {

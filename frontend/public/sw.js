@@ -1,10 +1,11 @@
-const CACHE_NAME = 'fokus-shell-v2'
+const CACHE_NAME = 'fokus-shell-v3'
 const APP_SHELL = [
   '/',
   '/index.html',
   '/manifest.webmanifest',
-  '/icons/organiza-192.png',
-  '/icons/organiza-512.png',
+  '/icons/fokus-logo.png',
+  '/icons/fokus-192.png',
+  '/icons/fokus-512.png',
 ]
 
 self.addEventListener('install', (event) => {
