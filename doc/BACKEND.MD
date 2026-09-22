@@ -1,5 +1,20 @@
 # Backend — Estándar de Desarrollo
 
+# Protocolo de Estándares de Código Backend
+
+Antes de crear, modificar o refactorizar cualquier archivo en este proyecto, DEBES acatar la documentación modular definida en la carpeta `doc/`:
+
+1. Lee siempre `doc/BACKEND.MD` para los estándares generales de código.
+2. Según el componente que estés desarrollando, lee obligatoriamente su archivo correspondiente:
+   - Controllers: `doc/mk.backend/controllers.md`
+   - Models: `doc/mk.backend/models.md`
+   - Routes: `doc/mk.backend/routes.md`
+   - Validations: `doc/mk.backend/validations.md`
+   - Database: `doc/mk.backend/database.md`
+   - Auth: `doc/mk.backend/auth.md`
+   - Helpers: `doc/mk.backend/helpers.md`
+
+3. Consulta la memoria de Engram si existen decisiones o reglas arquitectónicas previas registradas para el proyecto.
 ## 1. Objetivo
 
 Este documento define cómo debe escribirse y estructurarse el código Backend del proyecto.
@@ -9,6 +24,7 @@ Todo código nuevo deberá respetar los patrones definidos en este documento.
 Si una funcionalidad nueva necesita una implementación que no esté definida aquí, deberá utilizar el patrón existente más cercano y mantener el mismo estilo general del proyecto.
 
 No deberá introducir una forma diferente de trabajar cuando ya exista un patrón establecido.
+
 
 ---
 
