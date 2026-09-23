@@ -1,4 +1,4 @@
-# 30. Base de datos
+# 1. Base de datos
 
 La conexión deberá seguir el patrón existente.
 

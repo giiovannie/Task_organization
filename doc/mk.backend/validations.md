@@ -1,4 +1,4 @@
-# 17. Validaciones
+# 1. Validaciones
 
 Las validaciones deberán realizarse utilizando:
 
@@ -25,7 +25,7 @@ export const createUserValidation = [
 
 ---
 
-# 18. Orden de validaciones
+# 2. Orden de validaciones
 
 Las validaciones deberán organizarse de forma lógica.
 
@@ -61,7 +61,7 @@ body("email")
 
 ---
 
-# 19. Validación + existencia
+# 3. Validación + existencia
 
 Cuando una operación necesite comprobar que un recurso existe, la validación podrá realizarse dentro del validator mediante `.custom()`.
 
@@ -84,7 +84,7 @@ Esto permite que el controller reciba únicamente datos que ya pasaron las valid
 
 ---
 
-# 20. No repetir validaciones en Controllers
+# 4. No repetir validaciones en Controllers
 
 Si un validator ya comprobó que un recurso existe, el controller no deberá volver a realizar la misma comprobación.
 
@@ -110,7 +110,7 @@ La validación y la existencia deberán estar correctamente resueltas antes de l
 
 ---
 
-# 21. Validator de actualización
+# 5. Validator de actualización
 
 En operaciones de actualización, las validaciones de unicidad deberán permitir que el recurso mantenga su propio valor.
 
@@ -130,7 +130,7 @@ Ejemplo:
 
 ---
 
-# 22. Middleware de validación
+# 6. Middleware de validación
 
 Las validaciones deberán procesarse mediante un middleware común.
 

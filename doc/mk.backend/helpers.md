@@ -1,4 +1,4 @@
-# 28. Helpers
+# 1. Helpers
 
 Los helpers deberán contener funcionalidades reutilizables y específicas.
 

@@ -1,124 +1,106 @@
-# 13. Models
+# 1. Controllers
 
-Los modelos deberán definirse utilizando `sequelize.define()`.
+Los controllers serán responsables de ejecutar la lógica de negocio.
 
-Ejemplo:
-
-```js
-import { DataTypes } from "sequelize";
-import { sequelize } from "../config/database.js";
-
-export const UserModel = sequelize.define(
-  "User",
-  {
-    username: {
-      type: DataTypes.STRING(20),
-      unique: true,
-    },
-    email: {
-      type: DataTypes.STRING(100),
-      unique: true,
-    },
-    password: {
-      type: DataTypes.STRING(255),
-    },
-  },
-  {
-    paranoid: true,
-  },
-);
-```
-
-No introducir clases de Sequelize ni otras formas de definición cuando el proyecto ya utiliza `sequelize.define()`.
-
----
-
-# 14. Relaciones
-
-Las relaciones entre modelos deberán definirse en:
+Deberán utilizar:
 
 ```text
-models/relaciones.js
+try / catch
 ```
-
-Las relaciones no deberán distribuirse arbitrariamente dentro de los modelos.
 
 Ejemplo:
 
 ```js
-UserModel.hasOne(ProfileModel, {
-  foreignKey: "user_id",
-  as: "profile",
+export const getUserById = async (req, res) => {
+  try {
+    const { id } = matchedData(req);
+    const user = await UserModel.findByPk(id);
+    return res.status(200).json({
+      message: "Usuario obtenido correctamente",
+      user,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "Error interno en el servidor",
+    });
+  }
+};
+```
+# 2. Paginación
+
+Las consultas que devuelvan listas de registros deberán implementar paginación mediante `limit` y `offset` utilizando `findAndCountAll()`.
+
+Ejemplo:
+
+```js
+const page = parseInt(req.query.page) || 1;
+const limit = parseInt(req.query.limit) || 10;
+const offset = (page - 1) * limit;
+
+const { count, rows } = await UserModel.findAndCountAll({
+  limit,
+  offset,
 });
-ProfileModel.belongsTo(UserModel, {
-  foreignKey: "user_id",
-  as: "user",
+
+return res.status(200).json({
+  totalItems: count,
+  totalPages: Math.ceil(count / limit),
+  currentPage: page,
+  data: rows,
 });
 ```
 
-Los nombres de los aliases deberán utilizar el singular o plural que resulte más claro según la relación.
+No utilizar `findAll()` sin límites en endpoints que devuelvan colecciones que puedan crecer considerablemente en la base de datos.
+---
+
+# 3. matchedData
+
+Los datos validados deberán obtenerse mediante:
+
+```js
+matchedData(req)
+```
 
 Ejemplo:
+
+```js
+const cleanData = matchedData(req);
+```
+
+Si se necesita separar un parámetro:
+
+```js
+const { id, ...cleanData } = matchedData(req);
+```
+
+No utilizar directamente:
+
+```js
+req.body
+```
+
+para procesar datos que ya deberían haber pasado por las validaciones.
+
+---
+
+# 4. CRUD
+
+Los recursos CRUD deberán mantener el siguiente patrón:
 
 ```text
-profile
-articles
-tags
+getAll...
+get...ById
+create...
+update...
+delete...
 ```
-
-Para relaciones `1:1` se utilizará normalmente singular.
-
-Para relaciones `1:N` o `N:M`, se utilizará normalmente plural cuando represente una colección.
-
----
-
-# 15. Includes
-
-Cuando se necesiten relaciones en una consulta se utilizará:
-
-```js
-include
-```
-
-respetando el alias definido en `relaciones.js`.
 
 Ejemplo:
 
 ```js
-include: [
-  {
-    model: ProfileModel,
-    as: "profile",
-  },
-]
-```
-
-No crear relaciones nuevas dentro del controller.
-
----
-
-# 16. Attributes
-
-Cuando sea necesario ocultar información sensible se utilizará:
-
-```js
-attributes: {
-  exclude: ["password"],
-}
-```
-
-Las contraseñas nunca deberán enviarse al cliente.
-
----
-
-# 35. Paranoid
-
-Cuando un modelo utilice:
-
-```js
-paranoid: true
-```
-
-se deberá respetar el comportamiento de eliminación lógica proporcionado por Sequelize.
-
-No eliminar físicamente registros salvo que exista una necesidad explícita.
+export const getAllUsers = async (req, res) => {};
+export const getUserById = async (req, res) => {};
+export const createUser = async (req, res) => {};
+export const updateUser = async (req, res) => {};
+export const deleteUser = async (req, res) => {};

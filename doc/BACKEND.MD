@@ -19,7 +19,7 @@ Antes de crear, modificar o refactorizar cualquier archivo en este proyecto, DEB
 
 Este documento define cómo debe escribirse y estructurarse el código Backend del proyecto.
 
-Todo código nuevo deberá respetar los patrones definidos en este documento.
+Todo código nuevo deberá respetar los patrones definidos en este documento y los MarksDown correspondientes segun lo que deba realizar
 
 Si una funcionalidad nueva necesita una implementación que no esté definida aquí, deberá utilizar el patrón existente más cercano y mantener el mismo estilo general del proyecto.
 

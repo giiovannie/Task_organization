@@ -1,4 +1,4 @@
-# 13. Models
+# 1. Models
 
 Los modelos deberán definirse utilizando `sequelize.define()`.
 
@@ -33,7 +33,7 @@ No introducir clases de Sequelize ni otras formas de definición cuando el proye
 
 ---
 
-# 14. Relaciones
+# 2. Relaciones
 
 Las relaciones entre modelos deberán definirse en:
 
@@ -72,7 +72,7 @@ Para relaciones `1:N` o `N:M`, se utilizará normalmente plural cuando represent
 
 ---
 
-# 15. Includes
+# 3. Includes
 
 Cuando se necesiten relaciones en una consulta se utilizará:
 
@@ -97,7 +97,7 @@ No crear relaciones nuevas dentro del controller.
 
 ---
 
-# 16. Attributes
+# 4. Attributes
 
 Cuando sea necesario ocultar información sensible se utilizará:
 
@@ -111,7 +111,7 @@ Las contraseñas nunca deberán enviarse al cliente.
 
 ---
 
-# 35. Paranoid
+# 5. Paranoid
 
 Cuando un modelo utilice:
 

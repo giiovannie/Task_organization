@@ -1,4 +1,4 @@
-# 24. Middleware de autenticación
+# 1. Middleware de autenticación
 
 La autenticación deberá utilizar JWT.
 
@@ -26,7 +26,7 @@ para obtener la información del usuario autenticado.
 
 ---
 
-# 25. Autorización
+# 2. Autorización
 
 Los permisos por rol deberán manejarse mediante middleware.
 
@@ -40,7 +40,7 @@ No colocar comprobaciones de roles repetidas dentro de cada controller cuando pu
 
 ---
 
-# 26. Passwords
+# 3. Passwords
 
 Las contraseñas deberán procesarse mediante los helpers definidos para bcrypt.
 
@@ -63,7 +63,7 @@ No utilizar bcrypt directamente dentro de los controllers si ya existe un helper
 
 ---
 
-# 27. JWT
+# 4. JWT
 
 La generación y verificación de tokens deberá realizarse mediante los helpers correspondientes.
 
